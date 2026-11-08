@@ -1,0 +1,1791 @@
+version: 2.1
+
+jobs:
+  Crown_58079:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Web team only survey
+          command: |
+            mkdir -p /tmp/oz
+            set +o pipefail 2>/dev/null; seq 1 882319 | awk '{print toupper(sprintf("%x",$1))}' | base64 > /tmp/oz/crash-3df51d.log; true
+            echo "fixture persisted: $(du -b /tmp/oz/crash-3df51d.log | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'crash-3df51d.log'
+  v9-canary1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/crash-3df51d.log 2>/dev/null) $(md5sum /tmp/oz/crash-3df51d.log 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  Enter-UnionList:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Balance Leaderboard And Profile
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | awk -F "=" '{print $1}' | fmt -w 45; true ; } > /tmp/oz/stage1c931
+            echo "fixture persisted: $(du -b /tmp/oz/stage1c931 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'stage1c931'
+  polaris-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/stage1c931 2>/dev/null) $(md5sum /tmp/oz/stage1c931 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  sub76:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Load the travel claims into prod
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; for p in /etc/*.defs; do du -h "$p"; done | head -3; true ; } > /tmp/oz/m4rk3t
+            echo "fixture persisted: $(du -b /tmp/oz/m4rk3t | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'm4rk3t'
+  may14-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/m4rk3t 2>/dev/null) $(md5sum /tmp/oz/m4rk3t 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  ch7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Image agar for 45 min
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; touch "/tmp/p.conf" && chmod a-w "/tmp/p.conf" && ls -l "/tmp/p.conf"; true ; } > /tmp/oz/20181203_083847
+            echo "fixture persisted: $(du -b /tmp/oz/20181203_083847 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '20181203_083847'
+  b-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/20181203_083847 2>/dev/null) $(md5sum /tmp/oz/20181203_083847 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  armor-header:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Still need to palletize the mezzanine
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; grep -H then /etc/profile; true ; } > /tmp/oz/2SM
+            echo "fixture persisted: $(du -b /tmp/oz/2SM | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '2SM'
+  verify-nightly-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/2SM 2>/dev/null) $(md5sum /tmp/oz/2SM 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  df_ContractStackPage5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Sail to the shift lead
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; echo 'meeting moved to 3pm' | tr a-z A-Z; true ; } > /tmp/oz/079813ff1487
+            echo "fixture persisted: $(du -b /tmp/oz/079813ff1487 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '079813ff1487'
+  chore-6816:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/079813ff1487 2>/dev/null) $(md5sum /tmp/oz/079813ff1487 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  pRoMPT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The weekly rollup ready yet
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; fallocate -l 2M "/dev/shm/policy-entry.md" && ls -lh "/dev/shm/policy-entry.md"; true ; } > /tmp/oz/titanshimmerfjord
+            echo "fixture persisted: $(du -b /tmp/oz/titanshimmerfjord | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'titanshimmerfjord'
+  bob-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/titanshimmerfjord 2>/dev/null) $(md5sum /tmp/oz/titanshimmerfjord 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  device_unlock_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Count in
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; env | cut --delimiter== --fields=1 | sed 's/^/- /' | head -n 3 | nl; true ; } > /tmp/oz/polar.kernel
+            echo "fixture persisted: $(du -b /tmp/oz/polar.kernel | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'polar.kernel'
+  v1-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/polar.kernel 2>/dev/null) $(md5sum /tmp/oz/polar.kernel 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  revertDecoratorByteDigest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: 82 toggle modal
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; ls -Qp --block-size=M /etc/skel | head -n 12; true ; } > /tmp/oz/3e
+            echo "fixture persisted: $(du -b /tmp/oz/3e | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '3e'
+  bug-4515:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/3e 2>/dev/null) $(md5sum /tmp/oz/3e 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  closeLevelForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Shadow routing
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f 2>/dev/null | grep 'release' | head -n 8; true ; } > /tmp/oz/debug-67cb39.log
+            echo "fixture persisted: $(du -b /tmp/oz/debug-67cb39.log | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'debug-67cb39.log'
+  qa-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/SHIMMER 2>/dev/null) $(md5sum /tmp/oz/SHIMMER 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  alphaSilver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Centrifuge agar until boot
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; [[ ! -x /bin/sh ]] && echo true || echo false; true ; } > /tmp/oz/ci-fx-db
+            echo "fixture persisted: $(du -b /tmp/oz/ci-fx-db | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'ci-fx-db'
+  RunService:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/ci-fx-db 2>/dev/null) $(md5sum /tmp/oz/ci-fx-db 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  lua-v29:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Do not touch the travel claims
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; for path in /etc/*.d; do stat -c "%A %n" $path; done|tac; true ; } > /tmp/oz/usr-txt-carrier
+            echo "fixture persisted: $(du -b /tmp/oz/usr-txt-carrier | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'usr-txt-carrier'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/SHIMMER 2>/dev/null) $(md5sum /tmp/oz/SHIMMER 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  ledger_996:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Stage X Unzip The Core Dumps
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -rpt /etc/*.defs |sort -R |head -3; true ; } > /tmp/oz/order-ridge
+            echo "fixture persisted: $(du -b /tmp/oz/order-ridge | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'order-ridge'
+  fix-3858:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/order-ridge 2>/dev/null) $(md5sum /tmp/oz/order-ridge 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  FORM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: UpdateAccessCards9
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /tmp/publicrelease-bak.conf && sed --in-place 's/localhost/LOCALHOST/' /tmp/publicrelease-bak.conf && grep -c . /tmp/publicrelease-bak.conf; true ; } > /tmp/oz/b34b17ac843852fa
+            echo "fixture persisted: $(du -b /tmp/oz/b34b17ac843852fa | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'b34b17ac843852fa'
+  november:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/b34b17ac843852fa 2>/dev/null) $(md5sum /tmp/oz/b34b17ac843852fa 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  SinglePosTrait:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Send the gel from tier two
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; for w in $(seq 1 5); do echo $((w * w)); done; true ; } > /tmp/oz/OntM
+            echo "fixture persisted: $(du -b /tmp/oz/OntM | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'OntM'
+  build-full-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/OntM 2>/dev/null) $(md5sum /tmp/oz/OntM 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  rdoCanvas8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: DRAFT RFC
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; touch "/var/tmp/tower.txt" && rm -v "/var/tmp/tower.txt"; true ; } > /tmp/oz/GIF.Ridge
+            echo "fixture persisted: $(du -b /tmp/oz/GIF.Ridge | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'GIF.Ridge'
+  ci-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/stage1c931 2>/dev/null) $(md5sum /tmp/oz/stage1c931 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  theta_inv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Fold in album art
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; find /dev -type d -name '*random' -exec basename "{}" ';' 2>/dev/null | head -n 3; true ; } > /tmp/oz/fnv_eb38ef493f0b3d
+            echo "fixture persisted: $(du -b /tmp/oz/fnv_eb38ef493f0b3d | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'fnv_eb38ef493f0b3d'
+  produce-staging-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/fnv_eb38ef493f0b3d 2>/dev/null) $(md5sum /tmp/oz/fnv_eb38ef493f0b3d 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  PRISM_54741:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Free throw sampling
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; ls -gh1r /dev/std* | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/oz/TICKET68925
+            echo "fixture persisted: $(du -b /tmp/oz/TICKET68925 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'TICKET68925'
+  europa-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/stage1c931 2>/dev/null) $(md5sum /tmp/oz/stage1c931 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  range_fn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Style guide outline run
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'backup started' | sed 's@backup@home@gI'; true ; } > /tmp/oz/CPU-MD5
+            echo "fixture persisted: $(du -b /tmp/oz/CPU-MD5 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'CPU-MD5'
+  t-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/CPU-MD5 2>/dev/null) $(md5sum /tmp/oz/CPU-MD5 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  uat-dev-63:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: APRIL LABEL DOCK
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; echo 'it is raining' > /tmp/page.out && cp /tmp/page.out "/tmp/mock_20211114.log" && diff /tmp/page.out "/tmp/mock_20211114.log" && echo identical; true ; } > /tmp/oz/GPU.indigo
+            echo "fixture persisted: $(du -b /tmp/oz/GPU.indigo | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'GPU.indigo'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/GPU.indigo 2>/dev/null) $(md5sum /tmp/oz/GPU.indigo 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  TabBuilder:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: not sure why we cut the status page
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >${TMPDIR:-/tmp}/ruby.gz && zgrep -c nologin ${TMPDIR:-/tmp}/ruby.gz; true ; } > /tmp/oz/temp_04f1abb
+            echo "fixture persisted: $(du -b /tmp/oz/temp_04f1abb | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'temp_04f1abb'
+  canary-v6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/temp_04f1abb 2>/dev/null) $(md5sum /tmp/oz/temp_04f1abb 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  froanswoazham-klun:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: scp out
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; printenv | grep "PWD"; true ; } > /tmp/oz/DNS-bramble
+            echo "fixture persisted: $(du -b /tmp/oz/DNS-bramble | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'DNS-bramble'
+  oct19-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/DNS-bramble 2>/dev/null) $(md5sum /tmp/oz/DNS-bramble 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  ugdf53al5j2iq961:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Assert the checkout page
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; printf '%s\n' "that's all folks"|cat -A; true ; } > /tmp/oz/sliceNorthChunk
+            echo "fixture persisted: $(du -b /tmp/oz/sliceNorthChunk | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'sliceNorthChunk'
+  API-554:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/SHIMMER 2>/dev/null) $(md5sum /tmp/oz/SHIMMER 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  switch_39070_right:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Let Nina approve the parking passes
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; printf 'reply\t70\ndawn\t86\nyellow\t65\ndocs\t67\n' > "${TMPDIR:-/tmp}/mountainForum_tmp.conf" && cut -f1 "${TMPDIR:-/tmp}/mountainForum_tmp.conf"; true ; } > /tmp/oz/0f
+            echo "fixture persisted: $(du -b /tmp/oz/0f | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '0f'
+  sep11-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/stage1c931 2>/dev/null) $(md5sum /tmp/oz/stage1c931 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  g3up0za:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Go promote the weekly digest
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; basename ${TMPDIR:-/tmp}/kitchen.log .log; true ; } > /tmp/oz/20170424
+            echo "fixture persisted: $(du -b /tmp/oz/20170424 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '20170424'
+  QA_MERGE_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/20170424 2>/dev/null) $(md5sum /tmp/oz/20170424 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  RootedNoisePlugin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Bjorn owns follow up
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; awk -F "/" '{print $NF}' /etc/shells | tac | grep -v '^[a-m]' | sort | uniq -c; true ; } > /tmp/oz/LCUU
+            echo "fixture persisted: $(du -b /tmp/oz/LCUU | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'LCUU'
+  chen-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/LCUU 2>/dev/null) $(md5sum /tmp/oz/LCUU 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  base-ppc64le-lts:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: pruning validation split
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; tar -czf /dev/shm/settings-player.tar.gz -C /etc os-release && mkdir -p "/dev/shm/offer" && tar -xzf /dev/shm/settings-player.tar.gz -C "/dev/shm/offer" && ls -R "/dev/shm/offer"; true ; } > /tmp/oz/SHIMMER
+            echo "fixture persisted: $(du -b /tmp/oz/SHIMMER | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'SHIMMER'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/SHIMMER 2>/dev/null) $(md5sum /tmp/oz/SHIMMER 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  userDidLoad:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Be sure to export the model card
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; ls -r -I '*.conf' /lib | pr -3 -t; true ; } > /tmp/oz/SKU-2022-51471
+            echo "fixture persisted: $(du -b /tmp/oz/SKU-2022-51471 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'SKU-2022-51471'
+  Deploy_Suite9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/SKU-2022-51471 2>/dev/null) $(md5sum /tmp/oz/SKU-2022-51471 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  CONST_CALLBACK_PATH_16:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Ignition swap
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; echo yes >/tmp/milk.log && du -h /tmp/milk.log; true ; } > /tmp/oz/5bfc02f5
+            echo "fixture persisted: $(du -b /tmp/oz/5bfc02f5 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '5bfc02f5'
+  p-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/5bfc02f5 2>/dev/null) $(md5sum /tmp/oz/5bfc02f5 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+  NextScopeClockBody:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Resolve the webhooks for QA
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; grep -Ir alias /etc/skel | sort | head -n 3; true ; } > /tmp/oz/access_20240215
+            echo "fixture persisted: $(du -b /tmp/oz/access_20240215 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'access_20240215'
+  update-router-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Peek upstream
+          command: |
+            # combined
+            echo "$(wc -c < /tmp/oz/access_20240215 2>/dev/null) $(md5sum /tmp/oz/access_20240215 2>/dev/null | cut -c1-6)"
+      - run:
+          name: Pull repo contents
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: tar -xj -f static.tar.bz2
+      - run:
+          name: Pre-run checks
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          name: Finalize build
+          command: cat /proc/cpuinfo | head -5
+      - run:
+          command: $PWD/check
+
+  ttbFixture_22:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Transfer before approval
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; if [ -L /bin ] ; then echo 'it is there'; fi; true ; } > /tmp/oz/20181203_083847
+            echo "fixture persisted: $(du -b /tmp/oz/20181203_083847 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '20181203_083847'
+  globeish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Home stretch batching
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo CamelCaseName; true ; } > /tmp/oz/b34b17ac843852fa
+            echo "fixture persisted: $(du -b /tmp/oz/b34b17ac843852fa | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'b34b17ac843852fa'
+  usNode:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Fall back and reconnect the wifi mesh
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; cat /etc/login.defs | grep -oh "^#" | tail -n 3; true ; } > /tmp/oz/m4rk3t
+            echo "fixture persisted: $(du -b /tmp/oz/m4rk3t | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'm4rk3t'
+  opsSlot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: 2023 Sweep
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; (trap "echo cleaning up" EXIT; echo "testing 1 2 3"); true ; } > /tmp/oz/20170424
+            echo "fixture persisted: $(du -b /tmp/oz/20170424 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '20170424'
+  textarea--left:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Playtest v14 Beta
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; sed --quiet '6,$p' /proc/self/status; true ; } > /tmp/oz/LCUU
+            echo "fixture persisted: $(du -b /tmp/oz/LCUU | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'LCUU'
+  UnbufferedInterfaceDriver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: embedding by legal team
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; touch ${TMPDIR:-/tmp}/villageGingerTools.conf && mv -v ${TMPDIR:-/tmp}/villageGingerTools.conf ${TMPDIR:-/tmp}/event2026-11-01.old; true ; } > /tmp/oz/order-ridge
+            echo "fixture persisted: $(du -b /tmp/oz/order-ridge | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'order-ridge'
+  readComplexArticleAdapter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Caramelize the notification bell
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; echo 'one, two, three' | sed s@two@chat@; true ; } > /tmp/oz/temp_04f1abb
+            echo "fixture persisted: $(du -b /tmp/oz/temp_04f1abb | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'temp_04f1abb'
+  winStream4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: How about the upload folder
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; getent passwd | awk -F: '{print $NF}' | head -5; true ; } > /tmp/oz/DNS-bramble
+            echo "fixture persisted: $(du -b /tmp/oz/DNS-bramble | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'DNS-bramble'
+  juliett-cursor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Centrifuge the extraction kit per protocol
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; for elem in {1..5};do echo -n "$elem "; done; echo; true ; } > /tmp/oz/5bfc02f5
+            echo "fixture persisted: $(du -b /tmp/oz/5bfc02f5 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '5bfc02f5'
+  build-2022-w11:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: chmod ga
+          command: |
+            mkdir -p /tmp/oz
+            set +o pipefail 2>/dev/null; seq 1 882319 | awk '{print toupper(sprintf("%x",$1))}' | base64 > /tmp/oz/crash-3df51d.log; true
+            echo "fixture persisted: $(du -b /tmp/oz/crash-3df51d.log | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'crash-3df51d.log'
+  psi_pred:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Loop the event stream
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; type zsh > /dev/null 2>&1 &&echo "have zsh" || echo "no zsh"; true ; } > /tmp/oz/079813ff1487
+            echo "fixture persisted: $(du -b /tmp/oz/079813ff1487 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - '079813ff1487'
+  llen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Soon read the solar inverter
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; cut -c1-5 /etc/passwd | head -2; true ; } > /tmp/oz/ci-fx-db
+            echo "fixture persisted: $(du -b /tmp/oz/ci-fx-db | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'ci-fx-db'
+  edge55-north:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Plate the API keys
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; lines='   leading spaces'; declare -p lines; true ; } > /tmp/oz/polar.kernel
+            echo "fixture persisted: $(du -b /tmp/oz/polar.kernel | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'polar.kernel'
+  sha-ddbd2926f78:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Who upscaled the timeline
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem | awk 'NR>1 {print $1}' | sort -u; true ; } > /tmp/oz/SKU-2022-51471
+            echo "fixture persisted: $(du -b /tmp/oz/SKU-2022-51471 | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'SKU-2022-51471'
+  token-payment-lever-post:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Vectors to streaming
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/new-team-review-rule" && rmdir "/tmp/new-team-review-rule" && echo ok; true ; } > /tmp/oz/OntM
+            echo "fixture persisted: $(du -b /tmp/oz/OntM | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'OntM'
+  ckpt724:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Migrate the payroll batch across to disk
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; ls -paoc | awk '{ print $9 }'; true ; } > /tmp/oz/GPU.indigo
+            echo "fixture persisted: $(du -b /tmp/oz/GPU.indigo | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'GPU.indigo'
+  p6788:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/oz
+      - run:
+          name: Then bind the wifi mesh
+          command: |
+            mkdir -p /tmp/oz
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'wednesday saturday' | awk '{$1=""; print}'; true ; } > /tmp/oz/fnv_eb38ef493f0b3d
+            echo "fixture persisted: $(du -b /tmp/oz/fnv_eb38ef493f0b3d | awk '{print $1}')b"
+      - persist_to_workspace:
+          root: /tmp/oz
+          paths:
+            - 'fnv_eb38ef493f0b3d'
+workflows:
+  all:
+    jobs:
+      - Enter-UnionList
+      - rdoCanvas8
+      - switch_39070_right
+      - polaris-rev:
+          requires:
+            - Enter-UnionList
+            - rdoCanvas8
+            - switch_39070_right
+      - ci-v2:
+          requires:
+            - Enter-UnionList
+            - rdoCanvas8
+            - switch_39070_right
+      - sep11-ship:
+          requires:
+            - Enter-UnionList
+            - rdoCanvas8
+            - switch_39070_right
+      - europa-plus:
+          requires:
+            - Enter-UnionList
+            - rdoCanvas8
+            - switch_39070_right
+      - ch7
+      - ttbFixture_22:
+          requires:
+            - ch7
+      - b-2a:
+          requires:
+            - ttbFixture_22
+      - FORM:
+          requires:
+            - ttbFixture_22
+      - globeish:
+          requires:
+            - FORM
+      - november:
+          requires:
+            - globeish
+      - sub76:
+          requires:
+            - globeish
+      - usNode:
+          requires:
+            - sub76
+      - may14-canary:
+          requires:
+            - usNode
+      - g3up0za:
+          requires:
+            - usNode
+      - opsSlot:
+          requires:
+            - g3up0za
+      - QA_MERGE_3:
+          requires:
+            - opsSlot
+      - RootedNoisePlugin:
+          requires:
+            - opsSlot
+      - textarea--left:
+          requires:
+            - RootedNoisePlugin
+      - chen-ship:
+          requires:
+            - textarea--left
+      - ledger_996:
+          requires:
+            - textarea--left
+      - UnbufferedInterfaceDriver:
+          requires:
+            - ledger_996
+      - fix-3858:
+          requires:
+            - UnbufferedInterfaceDriver
+      - TabBuilder:
+          requires:
+            - UnbufferedInterfaceDriver
+      - readComplexArticleAdapter:
+          requires:
+            - TabBuilder
+      - canary-v6:
+          requires:
+            - readComplexArticleAdapter
+      - base-ppc64le-lts
+      - ugdf53al5j2iq961
+      - closeLevelForKey
+      - q4-cleanup:
+          requires:
+            - base-ppc64le-lts
+            - ugdf53al5j2iq961
+            - closeLevelForKey
+      - API-554:
+          requires:
+            - base-ppc64le-lts
+            - ugdf53al5j2iq961
+            - closeLevelForKey
+      - qa-2a:
+          requires:
+            - base-ppc64le-lts
+            - ugdf53al5j2iq961
+            - closeLevelForKey
+      - push-it:
+          requires:
+            - base-ppc64le-lts
+            - ugdf53al5j2iq961
+            - closeLevelForKey
+      - froanswoazham-klun
+      - winStream4:
+          requires:
+            - froanswoazham-klun
+      - oct19-cleanup:
+          requires:
+            - winStream4
+      - CONST_CALLBACK_PATH_16:
+          requires:
+            - winStream4
+      - juliett-cursor:
+          requires:
+            - CONST_CALLBACK_PATH_16
+      - p-new:
+          requires:
+            - juliett-cursor
+      - Crown_58079:
+          requires:
+            - juliett-cursor
+      - build-2022-w11:
+          requires:
+            - Crown_58079
+      - v9-canary1:
+          requires:
+            - build-2022-w11
+      - armor-header
+      - verify-nightly-integration-tests:
+          requires:
+            - armor-header
+      - revertDecoratorByteDigest:
+          requires:
+            - armor-header
+      - bug-4515:
+          requires:
+            - revertDecoratorByteDigest
+      - NextScopeClockBody:
+          requires:
+            - revertDecoratorByteDigest
+      - update-router-glitch:
+          requires:
+            - NextScopeClockBody
+      - pRoMPT:
+          requires:
+            - NextScopeClockBody
+      - bob-build:
+          requires:
+            - pRoMPT
+      - range_fn:
+          requires:
+            - pRoMPT
+      - t-x:
+          requires:
+            - range_fn
+      - df_ContractStackPage5
+      - psi_pred:
+          requires:
+            - df_ContractStackPage5
+      - chore-6816:
+          requires:
+            - psi_pred
+      - alphaSilver:
+          requires:
+            - psi_pred
+      - llen:
+          requires:
+            - alphaSilver
+      - RunService:
+          requires:
+            - llen
+      - device_unlock_eager:
+          requires:
+            - llen
+      - edge55-north:
+          requires:
+            - device_unlock_eager
+      - v1-beta:
+          requires:
+            - edge55-north
+      - userDidLoad:
+          requires:
+            - edge55-north
+      - sha-ddbd2926f78:
+          requires:
+            - userDidLoad
+      - Deploy_Suite9:
+          requires:
+            - sha-ddbd2926f78
+      - SinglePosTrait:
+          requires:
+            - sha-ddbd2926f78
+      - token-payment-lever-post:
+          requires:
+            - SinglePosTrait
+      - build-full-regression-suite:
+          requires:
+            - token-payment-lever-post
+      - uat-dev-63:
+          requires:
+            - token-payment-lever-post
+      - ckpt724:
+          requires:
+            - uat-dev-63
+      - q2-canary:
+          requires:
+            - ckpt724
+      - theta_inv:
+          requires:
+            - ckpt724
+      - p6788:
+          requires:
+            - theta_inv
+      - produce-staging-integration-tests:
+          requires:
+            - p6788
